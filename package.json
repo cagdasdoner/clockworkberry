@@ -1,0 +1,17 @@
+{
+  "name": "pi",
+  "description": "Raspian",
+  "author": "pi",
+  "dependencies": {
+    "express": "latest",
+    "socket.io": "latest",
+    "ejs": "latest",
+    "cron": "latest",
+    "dblite":"latest",
+    "log4js":"latest",
+    "moment":"latest",
+    "events":"latest",
+    "util":"latest"
+  },
+  "engine": "node 0.10.28"
+}

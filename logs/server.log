@@ -1,0 +1,98 @@
+[2016-08-26 09:14:20.515] [TRACE] server - Server is starting...
+[2016-08-26 09:14:20.541] [TRACE] server - Working on the PC! @Turkey
+[2016-08-26 09:14:20.542] [INFO] server - sending to RASPBERRY! data type : string, toString : type=SPR,id=1,data=1,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.543] [INFO] server - sending to RASPBERRY! data type : string, toString : type=SPR,id=2,data=1,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.543] [INFO] server - sending to RASPBERRY! data type : string, toString : type=SPR,id=3,data=1,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.543] [INFO] server - sending to RASPBERRY! data type : string, toString : type=SPR,id=4,data=1,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.543] [INFO] server - sending to RASPBERRY! data type : string, toString : type=LMP,id=1,data=1,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.543] [INFO] server - sending to RASPBERRY! data type : string, toString : type=LMP,id=2,data=1,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.543] [INFO] server - sending to RASPBERRY! data type : string, toString : type=LMP,id=3,data=1,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.544] [INFO] server - sending to RASPBERRY! data type : string, toString : type=TMP,id=1,data=1,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.545] [INFO] server - HTTP Server listening to 7999 within development environment
+[2016-08-26 09:14:20.569] [INFO] server - >SPRINKLER data from RASPBERRY : type=SPR,id=1,data=0,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.570] [INFO] server - >SPRINKLER data from RASPBERRY : type=SPR,id=2,data=0,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.571] [INFO] server - >SPRINKLER data from RASPBERRY : type=SPR,id=3,data=0,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.572] [INFO] server - >SPRINKLER data from RASPBERRY : type=SPR,id=4,data=0,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.572] [INFO] server - >LAMP data from RASPBERRY : type=LMP,id=1,data=0,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.572] [INFO] server - >LAMP data from RASPBERRY : type=LMP,id=2,data=0,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:20.573] [INFO] server - >LAMP data from RASPBERRY : type=LMP,id=3,data=0,initialize=1,timer=0,interval=0
+[2016-08-26 09:14:35.554] [WARN] server - stderr: /bin/sh: 1: ntpq: not found
+
+[2016-08-26 09:14:35.556] [TRACE] server - stdout: stratum=2, offset=1.594, sys_jitter=1.998
+[2016-08-26 09:14:35.559] [INFO] server - Reading stratum : 2
+[2016-08-26 09:14:35.563] [ERROR] server - EXEC Failed! : Error: Command failed: /bin/sh: 1: ntpq: not found
+
+[2016-08-26 09:14:35.565] [INFO] server - currently read timer from sprinklertimerstore : type=SPR,id=1,data=ST:OP,initialize=0,timer=1,interval=15
+[2016-08-26 09:14:35.565] [INFO] server - currently read timer from sprinklertimerstore : type=SPR,id=2,data=ST:OP,initialize=0,timer=1,interval=30
+[2016-08-26 09:14:35.565] [INFO] server - currently read timer from sprinklertimerstore : type=SPR,id=3,data=ST:OP,initialize=0,timer=1,interval=30
+[2016-08-26 09:14:35.565] [INFO] server - currently read timer from sprinklertimerstore : type=SPR,id=4,data=ST:OP,initialize=0,timer=1,interval=30
+[2016-08-26 09:14:35.566] [INFO] server - currently read timer from lamptimerstore : type=LMP,id=1,data=AS:TR,initialize=0,timer=1,interval=0
+[2016-08-26 09:14:35.566] [INFO] server - currently read timer from lamptimerstore : type=LMP,id=2,data=AS:TR,initialize=0,timer=1,interval=0
+[2016-08-26 09:14:35.566] [INFO] server - currently read timer from lamptimerstore : type=LMP,id=3,data=AS:TR,initialize=0,timer=1,interval=0
+[2016-08-26 09:14:39.446] [TRACE] server - a user connected.
+[2016-08-26 09:15:36.209] [TRACE] server - astronomicEvent gathered : off,stored len : 3
+[2016-08-26 09:15:36.210] [INFO] server - based on astro timer, set action for 1. lamp: ST:OP
+[2016-08-26 09:15:36.210] [INFO] server - sending to RASPBERRY! data type : string, toString : type=LMP,id=1,data=ST:OP,initialize=0,timer=1,interval=1
+[2016-08-26 09:15:36.210] [INFO] server - based on astro timer, set action for 2. lamp: ST:OP
+[2016-08-26 09:15:36.210] [INFO] server - sending to RASPBERRY! data type : string, toString : type=LMP,id=2,data=ST:OP,initialize=0,timer=1,interval=1
+[2016-08-26 09:15:36.211] [INFO] server - based on astro timer, set action for 3. lamp: ST:OP
+[2016-08-26 09:15:36.211] [INFO] server - sending to RASPBERRY! data type : string, toString : type=LMP,id=3,data=ST:OP,initialize=0,timer=1,interval=1
+[2016-08-26 09:15:36.213] [INFO] server - >LAMP data from RASPBERRY : type=LMP,id=1,data=0,initialize=0,timer=0,interval=1
+[2016-08-26 09:15:36.215] [INFO] server - >LAMP data from RASPBERRY : type=LMP,id=2,data=0,initialize=0,timer=0,interval=1
+[2016-08-26 09:15:36.217] [INFO] server - >LAMP data from RASPBERRY : type=LMP,id=3,data=0,initialize=0,timer=0,interval=1
+[2016-08-26 09:34:15.769] [INFO] server - received SOCKET.IO (update)! type=SPR,id=1,data=1,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:15.770] [INFO] server - sending to RASPBERRY! data type : string, toString : type=SPR,id=1,data=1,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:15.770] [INFO] server - >SPRINKLER data from RASPBERRY : type=SPR,id=1,data=1,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:18.425] [INFO] server - received SOCKET.IO (update)! type=SPR,id=1,data=0,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:18.425] [INFO] server - sending to RASPBERRY! data type : string, toString : type=SPR,id=1,data=0,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:18.426] [INFO] server - >SPRINKLER data from RASPBERRY : type=SPR,id=1,data=0,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:24.993] [INFO] server - received SOCKET.IO (timerize)! type=LMP,id=1,data=ST:OP,initialize=0,timer=1,interval=0
+[2016-08-26 09:34:27.896] [INFO] server - received SOCKET.IO (timerize)! type=LMP,id=2,data=ST:OP,initialize=0,timer=1,interval=0
+[2016-08-26 09:34:30.425] [INFO] server - received SOCKET.IO (timerize)! type=LMP,id=3,data=ST:OP,initialize=0,timer=1,interval=0
+[2016-08-26 09:34:54.537] [INFO] server - received SOCKET.IO (update)! type=SPR,id=2,data=1,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:54.538] [INFO] server - sending to RASPBERRY! data type : string, toString : type=SPR,id=2,data=1,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:54.538] [INFO] server - >SPRINKLER data from RASPBERRY : type=SPR,id=2,data=1,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:57.105] [INFO] server - received SOCKET.IO (update)! type=SPR,id=2,data=0,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:57.105] [INFO] server - sending to RASPBERRY! data type : string, toString : type=SPR,id=2,data=0,initialize=0,timer=0,interval=0
+[2016-08-26 09:34:57.106] [INFO] server - >SPRINKLER data from RASPBERRY : type=SPR,id=2,data=0,initialize=0,timer=0,interval=0
+[2016-08-26 09:36:34.732] [TRACE] server - user disconnected.
+[2016-08-26 09:36:34.880] [TRACE] server - a user connected.
+[2016-08-26 09:37:21.980] [TRACE] server - user disconnected.
+[2016-08-26 09:37:22.091] [TRACE] server - a user connected.
+[2016-08-26 09:37:38.691] [TRACE] server - user disconnected.
+[2016-08-26 09:37:38.766] [TRACE] server - a user connected.
+[2016-08-26 09:37:49.303] [TRACE] server - user disconnected.
+[2016-08-26 09:37:49.427] [TRACE] server - a user connected.
+[2016-08-26 09:37:58.914] [TRACE] server - user disconnected.
+[2016-08-26 09:37:59.047] [TRACE] server - a user connected.
+[2016-08-26 09:55:50.502] [TRACE] server - user disconnected.
+[2016-08-26 09:55:50.619] [TRACE] server - a user connected.
+[2016-08-26 11:23:00.393] [TRACE] server - user disconnected.
+[2016-08-26 11:23:00.578] [TRACE] server - a user connected.
+[2016-08-26 11:23:21.988] [TRACE] server - user disconnected.
+[2016-08-26 11:23:22.078] [TRACE] server - a user connected.
+[2016-08-26 11:23:36.203] [TRACE] server - user disconnected.
+[2016-08-26 11:23:36.321] [TRACE] server - a user connected.
+[2016-08-26 11:23:53.679] [TRACE] server - user disconnected.
+[2016-08-26 11:23:53.797] [TRACE] server - a user connected.
+[2016-08-26 11:24:12.855] [TRACE] server - user disconnected.
+[2016-08-26 11:24:12.963] [TRACE] server - a user connected.
+[2016-08-26 11:24:27.577] [TRACE] server - user disconnected.
+[2016-08-26 11:24:27.702] [TRACE] server - a user connected.
+[2016-08-26 11:24:44.927] [TRACE] server - user disconnected.
+[2016-08-26 11:24:45.044] [TRACE] server - a user connected.
+[2016-08-26 11:24:51.562] [TRACE] server - user disconnected.
+[2016-08-26 11:24:51.620] [TRACE] server - a user connected.
+[2016-08-26 11:31:39.133] [TRACE] server - user disconnected.
+[2016-08-26 11:31:39.246] [TRACE] server - a user connected.
+[2016-08-26 11:31:40.546] [TRACE] server - user disconnected.
+[2016-08-27 14:45:27.552] [TRACE] server - astronomicEvent gathered : on,stored len : 3
+[2016-08-27 14:45:27.574] [INFO] server - based on astro timer, set action for 1. lamp: AS:TR
+[2016-08-27 14:45:27.576] [INFO] server - sending to RASPBERRY! data type : string, toString : type=LMP,id=1,data=AS:TR,initialize=0,timer=1,interval=1
+[2016-08-27 14:45:27.576] [INFO] server - based on astro timer, set action for 2. lamp: AS:TR
+[2016-08-27 14:45:27.576] [INFO] server - sending to RASPBERRY! data type : string, toString : type=LMP,id=2,data=AS:TR,initialize=0,timer=1,interval=1
+[2016-08-27 14:45:27.699] [INFO] server - based on astro timer, set action for 3. lamp: AS:TR
+[2016-08-27 14:45:27.699] [INFO] server - sending to RASPBERRY! data type : string, toString : type=LMP,id=3,data=AS:TR,initialize=0,timer=1,interval=1
+[2016-08-27 14:45:27.729] [INFO] server - >LAMP data from RASPBERRY : type=LMP,id=1,data=1,initialize=0,timer=0,interval=1
+[2016-08-27 14:45:27.730] [INFO] server - >LAMP data from RASPBERRY : type=LMP,id=2,data=1,initialize=0,timer=0,interval=1
+[2016-08-27 14:45:27.730] [INFO] server - >LAMP data from RASPBERRY : type=LMP,id=3,data=1,initialize=0,timer=0,interval=1

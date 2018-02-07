@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="libs/bootstrap-3.3.5-dist/css/bootstrap.css">
+<link rel="stylesheet" href="libs/bootstrap-datetimepicker-dist/css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="libs/bootstrap-touchspin-dist/jquery.bootstrap-touchspin.min.css">
+
+<script type="text/javascript">
+    function setInitAttributes()
+    { 
+        <% initialLamp.forEach(function(lamp) { %>
+            parseCommandAndPutInAction("<%= lamp %>");
+        <% }); %>
+        
+        <% initialSprinkler.forEach(function(sprinkler) { %>
+            parseCommandAndPutInAction("<%= sprinkler %>");
+        <% }); %>
+        
+        <% initialTimerSprinkler.forEach(function(timerSprinkler) { %>
+            parseCommandAndPutInAction("<%= timerSprinkler %>");
+        <% }); %>
+        
+        <% initialAstronomicTimerLamp.forEach(function(astronomicLamp) { %>
+            parseCommandAndPutInAction("<%= astronomicLamp %>");
+        <% }); %>
+        
+        <% if(workingMode == 1) { %>
+            <% initialTemp.forEach(function(temperature) { %>
+                parseCommandAndPutInAction("<%= temperature %>");
+            <% }); %>
+        <% } %>
+        
+        fireTheClock("<%= initialDateTime %>");
+        document.getElementById("statDiv").innerHTML = "Touch on an item to change its status.";
+    }
+</script>
+
+<div class="header container navbar navbar-default navbar-fixed-top col-lg-4">
+    <div class="row">
+        <div class=" text-center">
+            <span id="connectionStatDiv" class="glyphicon glyphicon-ban-circle text-danger large"> Disconnected</span>
+        </div>
+        <div class="text-center">
+            <ul  role="menu">
+                <a data-toggle="pill" href="#menuSprinklers"><span class="glyphicon glyphicon-tint  nav nav-pills"> Sprinkler</span></a> | 
+                <a data-toggle="pill" href="#menuLamps"><span class="glyphicon glyphicon-flash  nav nav-pills"> Lamps</a> | 
+                <a data-toggle="pill" href="#menuTimers"><span class="glyphicon glyphicon-bell  nav nav-pills"> Timers</a> | 
+                <a data-toggle="pill" href="#menuWindows"><span class="glyphicon glyphicon-picture  nav nav-pills"> Windows</a> | 
+                <a data-toggle="pill" href="#menuSensors"><span class="glyphicon glyphicon-dashboard  nav nav-pills"> Sensors</a> | 
+                <a data-toggle="pill" href="#menuThermostats"><span class="glyphicon glyphicon-fire  nav nav-pills"> Thermostats</a>
+            </ul>
+        </div>
+    </div>
+</div>
+</head>
+
+<body onload=setInitAttributes()>
+
+<div class="container col-lg-4 col-lg-push-4">
+    <div class="tab-content">
+        <div id="menuSprinklers" class="tab-pane fade in active">
+            <h4 class="glyphicon glyphicon-tint"> Sprinklers</h4>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td>Front</td>
+                    <td class="text-right">
+                        <button id="sprinklerButton1" class="btn btn-danger btn-lg" onclick="sendSprinklerStatus(Id.FIRST_SPRINKLER)" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-off"></span> 
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Rare</td>
+                    <td class="text-right">
+                        <button id="sprinklerButton2" class="btn btn-danger btn-lg" onclick="sendSprinklerStatus(Id.SECOND_SPRINKLER)" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-off"></span> 
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Left Side</td>
+                    <td class="text-right">
+                        <button id="sprinklerButton3" class="btn btn-danger btn-lg" onclick="sendSprinklerStatus(Id.THIRD_SPRINKLER)" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-off"></span> 
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Right Side</td>
+                    <td class="text-right">
+                        <button id="sprinklerButton4" class="btn btn-danger btn-lg" onclick="sendSprinklerStatus(Id.FOURTH_SPRINKLER)" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-off"></span> 
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        <div id="menuLamps" class="tab-pane fade">
+            <h4 class="glyphicon glyphicon-flash"> Lamps</h4>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td>Garden</td>
+                    <td class="text-right">
+                        <button id="lampButton1" class="btn btn-danger btn-lg" onclick="sendLampStatus(Id.FIRST_LAMP)" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-off"></span> 
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kitchen</td>
+                    <td class="text-right">
+                        <button id="lampButton2" class="btn btn-danger btn-lg" onclick="sendLampStatus(Id.SECOND_LAMP)" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-off"></span> 
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Backyard</td>
+                    <td class="text-right">
+                        <button id="lampButton3" class="btn btn-danger btn-lg" onclick="sendLampStatus(Id.THIRD_LAMP)" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-off"></span> 
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>  
+        </div>
+        <div id="menuTimers" class="tab-pane fade in">
+            <h4 class="glyphicon glyphicon-bell">Sprinkler Timers</h4>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td >Front</td>
+                    <td >
+                        <button id="timerId1" class="btn btn-danger"><div class="glyphicon glyphicon-bell"></div><span> Off</span></button>
+                    </td>
+                    <td id="setTimerDiv1" class="col-lg-4">
+                        <div class="input-group input-group date" id="datetimepicker1">
+                            <input type='label' class="form-control">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="intervalspinner1" type="text" value="30" name="intervalspinner1" class="form-control input">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td >Rare</td>
+                    <td >
+                        <button id="timerId2" class="btn btn-danger"><div class="glyphicon glyphicon-bell"></div><span> Off</span></button>
+                    </td>
+                    <td id="setTimerDiv2" class="col-lg-4">
+                        <div class='input-group input-group date' id='datetimepicker2'>
+                            <input type='label' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="intervalspinner2" type="text" value="30" name="intervalspinner2" class="form-control input">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Left Side</td>
+                    <td>
+                        <button id="timerId3" class="btn btn-danger"><div class="glyphicon glyphicon-bell"></div><span> Off</span></button>
+                    </td>
+                    <td id="setTimerDiv3" class="col-lg-4">
+                        <div class='input-group input-group date' id='datetimepicker3'>
+                            <input type='label' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="intervalspinner3" type="text" value="30" name="intervalspinner3" class="form-control input">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Right Side</td>
+                    <td>
+                        <button id="timerId4" class="btn btn-danger"><div class="glyphicon glyphicon-bell"></div><span> Off</span></button>
+                    </td>
+                    <td id="setTimerDiv4" class="col-lg-4">
+                        <div class='input-group input-group date' id='datetimepicker4'>
+                            <input type='label' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="intervalspinner4" type="text" value="30" name="intervalspinner4" class="form-control input">
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h4 class="glyphicon glyphicon-globe">Astronomic Lamp Timers</h4>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td >Garden</td>
+                    <td >
+                        <button id="astronomicTimerId1" class="btn btn-danger" onclick="sendAstronomicLampTimerStatus(Id.FIRST_LAMP)" data-toggle="modal" data-target="#myModal">
+                            <div class="glyphicon glyphicon-bell"></div><span> Off</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td >Kitchen</td>
+                    <td >
+                        <button id="astronomicTimerId2" class="btn btn-danger" onclick="sendAstronomicLampTimerStatus(Id.SECOND_LAMP)" data-toggle="modal" data-target="#myModal">
+                            <div class="glyphicon glyphicon-bell"></div><span> Off</span>
+                        </button>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Backyard</td>
+                    <td>
+                        <button id="astronomicTimerId3" class="btn btn-danger" onclick="sendAstronomicLampTimerStatus(Id.THIRD_LAMP)" data-toggle="modal" data-target="#myModal">
+                            <div class="glyphicon glyphicon-bell"></div><span> Off</span>
+                        </button>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div id="menuWindows" class="tab-pane fade">
+            <h4 class="glyphicon glyphicon-picture"> Windows</h4>
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Living1</th>
+                        <th>Living2</th>
+                        <th>Sitting1</th>
+                        <th>Kitchen</th>
+                        <th>Bedroom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.FIRST_WINDOW, Action.UP)">
+                                <span class="glyphicon glyphicon-arrow-up"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.SECOND_WINDOW, Action.UP)">
+                              <span class="glyphicon glyphicon-arrow-up"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.THIRD_WINDOW, Action.UP)">
+                                <span class="glyphicon glyphicon-arrow-up"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.FOURTH_WINDOW, Action.UP)">
+                                <span class="glyphicon glyphicon-arrow-up"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.FIFTH_WINDOW, Action.UP)">
+                                <span class="glyphicon glyphicon-arrow-up"></span> 
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.FIRST_WINDOW, Action.STOP)">
+                                <span class="glyphicon glyphicon-stop"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.SECOND_WINDOW, Action.STOP)">
+                              <span class="glyphicon glyphicon-stop"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.THIRD_WINDOW, Action.STOP)">
+                                <span class="glyphicon glyphicon-stop"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.FOURTH_WINDOW, Action.STOP)">
+                                <span class="glyphicon glyphicon-stop"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.FIFTH_WINDOW, Action.STOP)">
+                                <span class="glyphicon glyphicon-stop"></span> 
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.FIRST_WINDOW, Action.DOWN)">
+                                <span class="glyphicon glyphicon-arrow-down"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.SECOND_WINDOW, Action.DOWN)">
+                              <span class="glyphicon glyphicon-arrow-down"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.THIRD_WINDOW, Action.DOWN)">
+                                <span class="glyphicon glyphicon-arrow-down"></span>  
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.FOURTH_WINDOW, Action.DOWN)">
+                                <span class="glyphicon glyphicon-arrow-down"></span> 
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="sendWindowAction(Id.FIFTH_WINDOW, Action.DOWN)">
+                                <span class="glyphicon glyphicon-arrow-down"></span> 
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="menuSensors" class="tab-pane fade">
+            <h4 class="glyphicon glyphicon-dashboard"> Sensors</h4>
+            <hr>
+            <div>
+                <span id="tempDiv1"></span>
+                <br><hr>
+                <center>
+                    <table class="table table-responsive"><tbody>
+                        <tr><td><iframe class="embed-responsive-item" width="450px" height="280px" style="border: 1px solid #cccccc;" src="http://api.thingspeak.com/channels/63158/charts/1?width=450&height=260&results=120&timescale=10&dynamic=false" ></iframe></td></tr>
+                    </tbody></table>
+                </center>
+            </div>
+        </div>
+        <div id="menuThermostats" class="tab-pane fade">
+            <h4 class="glyphicon glyphicon-fire"> Thermostats (Demo)</h4>
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Room</td><td> &#xB0 C</td><td>Status</td><td>Thermostat &#xB0 C</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Living R.</td>
+                        <td id="roomTemperature1"></td>
+                        <td id="roomThermostatStatus1"></td>
+                        <td>
+                            <div class="input-group input-group-sm  col-lg-4">
+                                <input id="thermostatSpinner1" type="text" value="24" name="thermostatSpinner1" class="form-control input">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sitting R.</td>
+                        <td id="roomTemperature2"></td>
+                        <td id="roomThermostatStatus2"></td>
+                        <td>
+                            <div class="input-group input-group-sm  col-lg-4">
+                                <input id="thermostatSpinner2" type="text" value="24" name="thermostatSpinner2" class="form-control input">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bedroom</td>
+                        <td id="roomTemperature3"></td>
+                        <td id="roomThermostatStatus3"></td>
+                        <td>
+                            <div class="input-group input-group-sm  col-lg-4">
+                                <input id="thermostatSpinner3" type="text" value="24" name="thermostatSpinner3" class="form-control input">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kitchen</td>
+                        <td id="roomTemperature4"></td>
+                        <td id="roomThermostatStatus4"></td>
+                        <td>
+                            <div class="input-group input-group-sm col-lg-4">
+                                <input id="thermostatSpinner4" type="text" value="24" name="thermostatSpinner4" class="form-control input">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer class="footer container navbar navbar-default navbar-fixed-bottom col-lg-4">
+    <div class="row">
+        <div id="timeStatDiv" class="glyphicon glyphicon-time col-xs-6 col-md-6 text-left "></div>
+        <div id="dateStatDiv" class="glyphicon glyphicon-calendar col-xs-6 col-md-6 text-right "></div>
+    </div>
+    <br>
+    <div id="statDiv" class="text-center">Service looks not ready! </div>
+</footer>
+
+<div class="modal fade container"  data-backdrop="static" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Processing...</h4>
+            </div>
+            <div class="modal-body">
+                <div class="progress progress-striped active">
+                    <div id ="myProgressbar"class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                        <span id="myProgressbarStat"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="libs/jquery.min.js"></script>
+<script src="libs/moment.min.js"></script>
+<script src="libs/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script src="libs/socket.io/socket.io.js"></script>
+<script src="libs/bootstrap-datetimepicker-dist/js/bootstrap-datetimepicker.js"></script>
+<script src="libs/bootstrap-touchspin-dist/jquery.bootstrap-touchspin.min.js"></script>
+
+<script src="types.js"></script>
+<script src="lampControl.js"></script>
+<script src="sprinklerControl.js"></script>
+<script src="timerSprinklerControl.js"></script>
+<script src="lampAstronomicTimerControl.js"></script>
+<script src="windowControl.js"></script>
+<script src="socketControl.js"></script>
+<script src="thermostatSensorControl.js"></script>
+<script src="modalControl.js"></script>
+
+<script type="text/javascript">
+    attachModalAndProgress();
+    initializeTimerHTMLElements();
+    registerTimerHTMLEvents();
+    registerThermostatHTMLEvents();
+</script>
+
+</body>
+</html>

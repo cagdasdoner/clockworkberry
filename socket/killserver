@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo kill $(ps -A -o pid,cmd|grep ./server | grep -v grep |head -n 1 | awk '{print $1}')
+sudo kill $(ps -A -o pid,cmd|grep server.js | grep -v grep |head -n 1 | awk '{print $1}')
+
